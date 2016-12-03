@@ -1,13 +1,10 @@
 const request = require('request');
 
 let geocodeAddress = (address, callback) => {
-    let encodedAddress = encodeURIComponent(address);
-
     request({
-        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedAddress,
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address),
         json: true
     }, (error, response, body) => {
-        //console.log(JSON.stringify(response, undefined, 2));
         if (error) {
             callback('Unable to connecto to google servers.');
         } else if (body.status === 'ZERO_RESULTS') {
@@ -24,4 +21,4 @@ let geocodeAddress = (address, callback) => {
 
 module.exports = {
     geocodeAddress
-}
+};
